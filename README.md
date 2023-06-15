@@ -1,7 +1,7 @@
 # ScreenMatch
 
 ## Descrição do Projeto
-O projeto ScreenMatch é um sistema para cálculos e recomendações de títulos de filmes e séries. Ele inclui classes e interfaces que representam diferentes tipos de títulos, como filmes e episódios de séries, além de uma calculadora de tempo e um filtro de recomendações. 
+O projeto ScreenMatch é um sistema para cálculos e recomendações de títulos de filmes e séries. Ele inclui classes e interfaces que representam diferentes tipos de títulos, como filmes e episódios de séries, além de uma calculadora de tempo e um filtro de recomendações.
 
 ## Estrutura do Projeto
 O projeto está organizado em pacotes da seguinte forma:
@@ -20,8 +20,8 @@ Este pacote contém as classes que representam os modelos de títulos.
 - `Serie`: Classe que representa uma série e implementa a interface `Classificavel`.
 - `Episodio`: Classe que representa um episódio de uma série e implementa a interface `Classificavel`.
 
-### Pacote principal
-O pacote principal contém a classe `Main`, que é a classe de entrada do programa e contém o método `main` para execução.
+### Pacote `br.com.alura.screenmatch.principal`
+Este pacote contém a classe `MainList`, que é a classe de entrada do programa e contém o método `main` para execução e teste das funcionalidades do projeto.
 
 ## Utilização
 Para utilizar o projeto, você pode criar instâncias das classes `Filme`, `Serie` e `Episodio`, configurar seus atributos e usar a `CalculadoraDeTempo` para calcular o tempo total. O `FiltroRecomendacao` pode ser utilizado para filtrar e exibir recomendações com base na classificação dos títulos.
@@ -30,37 +30,61 @@ Para utilizar o projeto, você pode criar instâncias das classes `Filme`, `Seri
 Aqui está um exemplo de uso do projeto:
 
 ```java
-import br.com.alura.screenmatch.calculos.CalculadoraDeTempo;
-import br.com.alura.screenmatch.calculos.FiltroRecomendacao;
-import br.com.alura.screenmatch.models.Episodio;
+package br.com.alura.screenmatch.principal;
+
 import br.com.alura.screenmatch.models.Filme;
 import br.com.alura.screenmatch.models.Serie;
+import br.com.alura.screenmatch.models.Titulo;
 
-public class Main {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class MainList {
     public static void main(String[] args) {
-        Filme filme = new Filme();
-        // Configurar atributos do filme...
+        Filme filme = new Filme("Free Guy", 2021);
+        filme.avalia(10);
+        Filme outro = new Filme("John Wick", 2014);
+        outro.avalia(3);
+        Serie serie = new Serie("The Last of Kingdom", 2015);
+        serie.avalia(9);
+        Filme filmeTop = new Filme("Como se fosse a primeira vez", 2004);
+        filmeTop.avalia(8);
 
-        Filme outro = new Filme();
-        // Configurar atributos do outro filme...
+        ArrayList<Titulo> lista = new ArrayList<>();
+        lista.add(filme);
+        lista.add(outro);
+        lista.add(serie);
+        lista.add(filmeTop);
 
-        Serie serie = new Serie();
-        // Configurar atributos da série...
+        for (Titulo item:lista) {
+            System.out.println("Nome: %s".formatted(item.getNome()));
+            if (item instanceof Filme filme1 && filme1.getClassificacao() > 2) {
+                System.out.println(filme1);
+            }
+        }
 
-        CalculadoraDeTempo calculadora = new CalculadoraDeTempo();
-        calculadora.inclui(filme);
-        calculadora.inclui(outro);
-        calculadora.inclui(serie);
+        ArrayList<String> procurarPorAtor = new ArrayList<>();
+        procurarPorAtor.add("Adam Sandler");
+        procurarPorAtor.add("Zendaya");
+        procurarPorAtor.add("Tom HolLand");
+        procurarPorAtor.add("Ben Affleck");
 
-        System.out.println("Tempo total: " + calculadora.getTempoTotal());
+        System.out.println(procurarPorAtor);
 
-        Episodio primeiro = new Episodio();
-        // Configurar atributos do episódio...
+        Collections.sort(procurarPorAtor);
 
-        FiltroRecomendacao filtro = new FiltroRecomendacao();
-        filtro.filtrar(filme);
-        filtro.filtrar(outro);
-        filtro.filtrar(primeiro);
+        System.out.println(procurarPorAtor);
+
+        System.out.println(lista);
+
+        Collections.sort(lista);
+
+        System.out.println(lista);
+
+        lista.sort(Comparator.comparing(Titulo::getAnoDeLancamento));
+
+        System.out.println(lista);
     }
 }
 ```
@@ -68,5 +92,4 @@ public class Main {
 ## Contribuição
 
 Contribuições para o projeto são bem-vindas. Se você encontrar algum problema ou tiver alguma sugestão, sinta-se à vontade para abrir uma issue ou enviar um pull request.
-
 
