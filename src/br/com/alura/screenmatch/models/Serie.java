@@ -9,6 +9,10 @@ public class Serie extends Titulo implements Classificavel {
     private int minutosPorEpisodio;
     private int totalVisualizacoes;
 
+    public Serie(String nome, int anoDeLancamento) {
+        super(nome, anoDeLancamento);
+    }
+
     public int getTotalVisualizacoes() {
         return totalVisualizacoes;
     }
@@ -61,5 +65,10 @@ public class Serie extends Titulo implements Classificavel {
         } else {
             return 2;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "%s (%d)".formatted(this.getNome(), this.getAnoDeLancamento());
     }
 }
