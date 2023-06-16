@@ -19,77 +19,20 @@ Este pacote contém as classes que representam os modelos de títulos.
 - `Filme`: Classe que representa um filme e implementa a interface `Classificavel`.
 - `Serie`: Classe que representa uma série e implementa a interface `Classificavel`.
 - `Episodio`: Classe que representa um episódio de uma série e implementa a interface `Classificavel`.
+- `TituloOmdb`: Classe que representa os dados obtidos da API do OMDB.
 
 ### Pacote `br.com.alura.screenmatch.principal`
 Este pacote contém a classe `MainList`, que é a classe de entrada do programa e contém o método `main` para execução e teste das funcionalidades do projeto.
+- `PrincipalComBusca`: Classe que permite a busca de títulos na API do OMDB e armazena os resultados em um arquivo JSON.
+
+### Pacote `br.com.alura.screenmatch.service`
+Este pacote contém a classe `BuscadorFilmes`, que é responsável por realizar a busca de filmes na API do OMDB.
+
+### Pacote `br.com.alura.screenmatch.util`
+Este pacote contém a classe `EscritorArquivo`, que é responsável por escrever os resultados da busca em um arquivo.
 
 ## Utilização
-Para utilizar o projeto, você pode criar instâncias das classes `Filme`, `Serie` e `Episodio`, configurar seus atributos e usar a `CalculadoraDeTempo` para calcular o tempo total. O `FiltroRecomendacao` pode ser utilizado para filtrar e exibir recomendações com base na classificação dos títulos.
-
-## Exemplo de Uso
-Aqui está um exemplo de uso do projeto:
-
-```java
-package br.com.alura.screenmatch.principal;
-
-import br.com.alura.screenmatch.models.Filme;
-import br.com.alura.screenmatch.models.Serie;
-import br.com.alura.screenmatch.models.Titulo;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-
-public class MainList {
-    public static void main(String[] args) {
-        Filme filme = new Filme("Free Guy", 2021);
-        filme.avalia(10);
-        Filme outro = new Filme("John Wick", 2014);
-        outro.avalia(3);
-        Serie serie = new Serie("The Last of Kingdom", 2015);
-        serie.avalia(9);
-        Filme filmeTop = new Filme("Como se fosse a primeira vez", 2004);
-        filmeTop.avalia(8);
-
-        ArrayList<Titulo> lista = new ArrayList<>();
-        lista.add(filme);
-        lista.add(outro);
-        lista.add(serie);
-        lista.add(filmeTop);
-
-        for (Titulo item:lista) {
-            System.out.println("Nome: %s".formatted(item.getNome()));
-            if (item instanceof Filme filme1 && filme1.getClassificacao() > 2) {
-                System.out.println(filme1);
-            }
-        }
-
-        ArrayList<String> procurarPorAtor = new ArrayList<>();
-        procurarPorAtor.add("Adam Sandler");
-        procurarPorAtor.add("Zendaya");
-        procurarPorAtor.add("Tom HolLand");
-        procurarPorAtor.add("Ben Affleck");
-
-        System.out.println(procurarPorAtor);
-
-        Collections.sort(procurarPorAtor);
-
-        System.out.println(procurarPorAtor);
-
-        System.out.println(lista);
-
-        Collections.sort(lista);
-
-        System.out.println(lista);
-
-        lista.sort(Comparator.comparing(Titulo::getAnoDeLancamento));
-
-        System.out.println(lista);
-    }
-}
-```
+Para utilizar o projeto, você pode criar instâncias das classes `Filme`, `Serie` e `Episodio`, configurar seus atributos e usar a `CalculadoraDeTempo` para calcular o tempo total. O `FiltroRecomendacao` pode ser utilizado para filtrar e exibir recomendações com base na classificação dos títulos. A classe `PrincipalComBusca` permite a busca de títulos na API do OMDB e armazena os resultados em um arquivo JSON.
 
 ## Contribuição
-
 Contribuições para o projeto são bem-vindas. Se você encontrar algum problema ou tiver alguma sugestão, sinta-se à vontade para abrir uma issue ou enviar um pull request.
-
